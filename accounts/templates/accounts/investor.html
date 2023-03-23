@@ -1,0 +1,135 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+<br>
+
+<div class="container bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+            </div>
+            <div class="col-md-6">
+                <br>
+                <div class="table-responsive">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>        
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-user text-primary"></span> 
+                                    Username                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{ investor.name }}
+                            </td>
+                        </tr>
+    
+    
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+                                    Role                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                Investor
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-envelope text-primary"></span> 
+                                    Email                                                
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{ investor.email }}
+                            </td>
+                        </tr>
+                        <tr>        
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-phone text-primary"></span>
+                                    Phone:                                              
+                                </strong>
+                            </td>
+                            <td class="text-primary">
+                                {{ investor.phone }}
+                            </td>
+                        </tr>                                  
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                                        
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <a class="btn-lg btn-primary" href="{% url 'make_investment' investor.id %}" class="table-link  text-info">Make an investment</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                {{ myFilter.form }}
+            <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table>
+                <tr>
+                    <th>Project</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+
+                </tr>
+
+                {% for investment in investments %}
+                <tr>
+                    <td>{{ investment.project }}</td>
+                    <td>₵{{ investment.amount }}</td>
+                    <td>{{ investment.date_created|date:'F j, Y' }}</td>
+                    <td>{{ investment.status }}</td>
+                    <td>
+                        <a href="{% url 'update_investment' investment.id %}" class="table-link text-info">
+                            <span class="fa-stack">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                        <a href="{% url 'delete_investment' investment.id %}" class="table-link danger">
+                            <span class="fa-stack">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

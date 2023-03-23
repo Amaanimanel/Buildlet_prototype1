@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <a class="btn-lg btn-primary" href="{% url 'user_investment' %}" class="table-link  text-info">Make an investment</a>
+            
+        </div>
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table>
+                <tr>
+                    <th>Project</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+
+                {% for investment in investments %}
+                <tr>
+                    <td>{{ investment.project }}</td>
+                    <td>₵{{ investment.amount }}</td>
+                    <td>{{ investment.date_created|date:'F j, Y' }}</td>
+                    <td>{{ investment.status }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
